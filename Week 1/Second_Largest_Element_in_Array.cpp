@@ -1,24 +1,54 @@
 #include <iostream>
-#include<limits.h>
+#include <string>
+#include <limits.h>
+#include <vector>
 using namespace std;
 
-int solve(int arr[], int size)
+string kthLargestNumber(vector<string> &nums, int k)
 {
-    int val=0;
-    for (int i = 0; i < size ; i++)
+    string ans;
+    int secondLargest = INT_MIN;
+    int largest = INT_MIN;
+
+    if (k <= 0 || k > nums.size())
     {
-        if (arr[i]>INT_MIN)
-        {
-            val=arr[i];
-        }
-        
+        return "-1";
     }
-    
+
+    for (int i = 0; i < k; i++)
+    {
+        try
+        {
+            int element = stoi(nums[i]);
+            if (element > largest)
+            {
+                secondLargest = largest;
+                largest = element;
+            }
+            else if (element > secondLargest && element < largest)
+            {
+                secondLargest = element;
+            }
+        }
+        catch (const std::invalid_argument &ia)
+        {
+            // Handle the case where the string cannot be converted to an integer
+            cerr << "Invalid argument: " << ia.what() << endl;
+            return "-1";
+        }
+    }
+
+    ans = to_string(secondLargest);
+    return ans;
 }
 
 int main()
 {
-    int arr[5] = {2, 4, 5, 6, 84};
-    int size = 5;
-    solve(arr, size);
+    vector<string> nums = {"3", "6", "7", "10"};
+    int size = nums.size();
+    string ans = kthLargestNumber(nums, size);
+
+    cout << "Your desired answer is: " << ans;
+
+    return 0;
 }
