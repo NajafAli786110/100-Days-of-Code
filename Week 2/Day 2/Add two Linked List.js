@@ -15,6 +15,13 @@ class LinkedList {
     this.tail = newNode;
   }
 }
+let l1 = new LinkedList(2);
+l1.appendNode(4);
+l1.appendNode(3);
+
+let l2 = new LinkedList(5);
+l2.appendNode(6);
+l2.appendNode(4);
 
 function getLinkedListSum(l1, l2) {
   let sum = "";
@@ -39,18 +46,9 @@ function getLinkedListSum(l1, l2) {
     return sum;
 }
 
-
-let l1 = new LinkedList(2);
-l1.appendNode(4);
-l1.appendNode(3);
-
-let l2 = new LinkedList(5);
-l2.appendNode(6);
-l2.appendNode(4);
+let ans = getLinkedListSum(l1.head, l2.head);
 
 let dummy = new LinkedList(0);
-
-let ans = getLinkedListSum(l1.head, l2.head);
 
 for (let i = 0; i < ans.length; i++) {
     dummy.appendNode(ans[i]);
